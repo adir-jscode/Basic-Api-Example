@@ -41,41 +41,7 @@ namespace BasicApiExample.Controllers
             return new List<Car>() { new Car { Id =1, Name ="Audi",Description = "2023 Model"} , new Car { Id = 2, Name = "BMW", Description = "2020 Model" } };
         }
 
-        [HttpPost]
-        public void PostCar(string Name,string Description)
-        {
-            var car = new Car()
-            {
-                Name = Name,
-                Description = Description,
-                CreatedDate = DateTime.Now,
-
-            };
-            _applicationDbContext.cars.Add(car);
-            _applicationDbContext.SaveChanges();
-            
-        }
-
-        [HttpPost]
-        public Car AddCar(Car car)
-        {
-            car.CreatedDate = DateTime.Now;
-            _applicationDbContext.cars.Add(car);
-            bool isSaved = _applicationDbContext.SaveChanges() > 0;
-            if (isSaved)
-            {
-                return car;
-            }
-            return null;
-            
-        }
-
-        [HttpGet]
-        public List<Car> GetAllCar()
-        {
-            var cars = _applicationDbContext.cars.ToList();
-            return cars;
-        }
+        
 
         //updated with new repo
 
