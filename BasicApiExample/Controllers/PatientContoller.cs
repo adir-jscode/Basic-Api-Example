@@ -31,12 +31,12 @@ namespace BasicApiExample.Controllers
         public IActionResult Create(Patient patient)
         {
             var newPatient = _patient.CreatePatient(patient);
-            if(newPatient <=0)
+            if (newPatient <= 0)
             {
                 return BadRequest("Falied");
             }
             else
-            return Ok("Done " + newPatient);
+                return Created("",newPatient);
         }
 
         [HttpGet]
@@ -56,7 +56,7 @@ namespace BasicApiExample.Controllers
             var UpdatedPatient = _patient.UpdatePatient(patient);
             if(UpdatedPatient <=0)
             {
-                return BadRequest();
+                return BadRequest("Data not found");
             }
             return Ok("Updated : " + UpdatedPatient);
         }

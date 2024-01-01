@@ -17,6 +17,7 @@ namespace BasicApiExample.Context
         public DbSet<Car> cars { get; set; }
 
         public virtual DbSet<Patient> patients { get; set; }
+        public DbSet<User> users { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
