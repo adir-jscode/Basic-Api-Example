@@ -1,4 +1,5 @@
 using BasicApiExample.Context;
+using BasicApiExample.Logging;
 using BasicApiExample.Repositories.Implementations;
 using BasicApiExample.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +14,9 @@ builder.Services.AddControllers();
 //DPI
 builder.Services.AddScoped<IPatient,PatientRepository>();
 builder.Services.AddTransient<IUser, UserRepository>();
+
+//custom logger
+builder.Services.AddSingleton<Ilogging, Logging>();
 
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

@@ -1,4 +1,5 @@
-﻿using BasicApiExample.Models;
+﻿using BasicApiExample.Logging;
+using BasicApiExample.Models;
 using BasicApiExample.Repositories.Interfaces;
 using CoreApiResponse;
 using Microsoft.AspNetCore.Http;
@@ -12,9 +13,12 @@ namespace BasicApiExample.Controllers
     public class UserController : BaseController
     {
         private readonly IUser _user;
-        public UserController(IUser user) 
+        //private readonly ILogger<UserController> _logger;
+        private readonly Ilogging _logger;
+        public UserController(IUser user, Ilogging logger) 
         {
             _user = user;
+            _logger = logger;
         }
 
         [HttpPost]
@@ -50,6 +54,7 @@ namespace BasicApiExample.Controllers
                 var users = _user.Users();
                 if (users != null)
                 {
+                    _logger.Log("User found", "");
                     return CustomResult("Data is loaded",users,HttpStatusCode.OK);
                 }
                 else
@@ -77,6 +82,7 @@ namespace BasicApiExample.Controllers
                 }
                 else
                 {
+                    _logger.Log("User is not found", "error");
                     return CustomResult("User not Found",HttpStatusCode.NotFound);
                 }
             }
